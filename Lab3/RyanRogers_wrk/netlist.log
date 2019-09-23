@@ -1,0 +1,48 @@
+
+Options ResourceUsage=yes UseNutmegFormat=no EnableOptim=yes TopDesignName="RyanRogers_lib:ind_main_16nH:schematic"
+define ind_data_16nH_RAR ( N__3  N__2 ) 
+;parameters 
+#uselib "ckt" , "S2P"
+S2P:SNP1  N__3 N__2 0 File="H:\RF_Lab\RyanRogers_wrk\.\data\IND_051_R60_16p0.s2p" Type="touchstone" InterpMode="linear" InterpDom="" ExtrapMode="constant" Temp=27.0 CheckPassivity=0 
+end ind_data_16nH_RAR
+define ind_model_16nH ( N__9  N__0 ) 
+;parameters 
+C:C4  0 N__3 C=C2 pF 
+C:C3  N__5 N__3 C=C3 pF 
+L:L1  N__5 N__1 L=L1 nH Noise=yes  
+R:R1  N__1 N__3 R=R1 Ohm Noise=yes 
+C:C1  0 N__5 C=C2 pF 
+MTAPER:Taper2  N__0 N__3 Subst="MSub1" W1=138 mil W2=28 mil L=72 mil 
+MTAPER:Taper1  N__9 N__5 Subst="MSub1" W1=138 mil W2=28 mil L=72 mil 
+model MSub1 MSUB H=60 mil Er=3.7 Mur=1 Cond=1.0E+50 Hu=1.0e+033 mm T=1.7 mil TanD=0.003 Rough=0 mm DielectricLossModel=1 FreqForEpsrTanD=1.0 GHz LowFreqForTanD=1.0 kHz HighFreqForTanD=1.0 THz RoughnessModel=2 
+
+C2=1 opt{ 0 to 2 }
+C3=0.1 opt{ 0 to 2 }
+L1=16.0 opt{ 0 to 30 }
+R1=1 opt{ 0 to 5 }
+end ind_model_16nH
+ind_data_16nH_RAR:I__0  N__3 N__0 
+Port:Term1  N__3 0 Num=1 Z=50 Ohm Noise=yes 
+Port:Term2  N__0 0 Num=2 Z=50 Ohm Noise=yes 
+ind_model_16nH:I__5  N__1 N__5 
+Port:Term3  N__1 0 Num=3 Z=50 Ohm Noise=yes 
+Port:Term4  N__5 0 Num=4 Z=50 Ohm Noise=yes 
+S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 \
+SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output" 
+
+SweepPlan: SP1_stim Start=0.05 GHz Stop=6 GHz Step=0.25 GHz 
+
+OutputPlan:SP1_Output \
+      Type="Output" \
+      UseEquationNestLevel=yes \
+      EquationNestLevel=2 \
+      UseSavedEquationNestLevel=yes \
+      SavedEquationNestLevel=2
+
+OptimGoal:OptimGoal1 Expr="mag(S11-S33)" SimInstanceName="SP1" Weight=1.0 \
+SpecLimitLine[1]="OptimGoal1_limit1" 
+SpecLimitLine:"OptimGoal1_limit1" Type="Inside" Min=0.0 Max=1e-3 Weight=1.0 
+OptimGoal:OptimGoal2 Expr="mag(S21-S43)" SimInstanceName="SP1" Weight=1.0 \
+SpecLimitLine[1]="OptimGoal2_limit1" 
+SpecLimitLine:"OptimGoal2_limit1" Type="Inside" Min=0.0 Max=1e-3 Weight=1.0 
+Optim:Optim1  OptimType="hpVMO" ErrorForm="L2" MaxIters=100 P=2 DesiredError=0.0 StatusLevel=4 FinalAnalysis="None" NormalizeGoals=yes SetBestValues=yes SaveSolns=yes SaveGoals=yes SaveOptimVars=no UpdateDataset=yes SaveNominal=no SaveAllIterations=no UseAllOptVars=yes UseAllGoals=yes SaveCurrentEF=no InitialTemp=0.1 NumShootsPerIter=20 EnableCockpit=yes SaveAllTrials=no 
