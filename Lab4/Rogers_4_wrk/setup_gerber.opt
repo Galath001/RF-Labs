@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<AdsTranslatorSetupFile Version="1.0">
+    <Import>
+        <ZeroSuppression>Leading</ZeroSuppression>
+        <CoordMode>AbsoluteCMode</CoordMode>
+        <NumIntegerDigits>2</NumIntegerDigits>
+        <NumFractionalDigits>4</NumFractionalDigits>
+        <Unit>inch</Unit>
+        <Layers />
+    </Import>
+    <Export>
+        <FileFormat>RS274X</FileFormat>
+        <ZeroSuppression>Leading</ZeroSuppression>
+        <CoordMode>AbsoluteCMode</CoordMode>
+        <NumIntegerDigits>2</NumIntegerDigits>
+        <NumFractionalDigits>6</NumFractionalDigits>
+        <XOffset>0</XOffset>
+        <YOffset>0</YOffset>
+        <Scale>1</Scale>
+        <OpenLineWidth>0.025</OpenLineWidth>
+        <SingleFile>0</SingleFile>
+        <Unit>inch</Unit>
+        <Flatten>0</Flatten>
+        <PathsAsPolygons>0</PathsAsPolygons>
+        <HoleFormat>Holes As Cutlines</HoleFormat>
+        <Layers>
+            <Layer EecadLayer="cond" AdsLayer="cond" Transfer="1" />
+            <Layer EecadLayer="default" AdsLayer="default" Transfer="1" />
+            <Layer AdsLayer="cond" Polarity="Positive" />
+            <Layer AdsLayer="default" Polarity="Positive" />
+        </Layers>
+        <SingleFileFilename></SingleFileFilename>
+        <DrillLayers />
+        <AutoMerge>0</AutoMerge>
+        <VectorizeText>1</VectorizeText>
+        <LayerStackup>1</LayerStackup>
+        <Nets />
+        <Components />
+    </Export>
+</AdsTranslatorSetupFile>

@@ -1,0 +1,12 @@
+Mon Sep 30 16:36:39 2019
+Writing Gerber file "H:\RF_Lab\RF-Labs\Lab4\Rogers_4_wrk\mfg\Rogers_4_lib_matckta\gerber".
+
+Warnings occurred during translation:
+
+
+WARNING: For artwork accuracy, Gerber precision should have a finer resolution than ADS layout precision.
+To ensure this, set the "Fractional digits" Gerber export option to be one greater than the number
+ of decimal places in the "Layout Units > Resolution" layout preference value.
+
+Export Complete
+

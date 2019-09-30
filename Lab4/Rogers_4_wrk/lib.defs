@@ -1,0 +1,4 @@
+INCLUDE $HPEESOF_DIR/oalibs/analog_rf.defs
+INCLUDE $HPEESOF_DIR/oalibs/dsp.defs
+DEFINE Rogers_4_lib Rogers_4_lib
+ASSIGN Rogers_4_lib libMode shared
