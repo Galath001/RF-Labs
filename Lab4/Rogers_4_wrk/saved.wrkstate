@@ -1,5 +1,7 @@
 <!DOCTYPE SaveWorkspaceState>
 <SaveWorkspaceState>
-    <Windows/>
+    <Windows>
+        <Schematic width="1920" cell="matdat" view="schematic" height="1017" tune="0" y1="-8" x1="-8" lib="Rogers_4_lib"/>
+    </Windows>
     <MainWindowTab tab="1"/>
 </SaveWorkspaceState>

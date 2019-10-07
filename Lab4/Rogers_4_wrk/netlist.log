@@ -27,6 +27,11 @@ MLEF2:TL3  N__6 Subst="MSub1" W=9.959880 mm L=19.55460 mm Wall1=2.5e+028 mm Wall
 model MSub1 MSUB H=1.5 mm Er=4.3 Mur=1 Cond=1.0E+50 Hu=3.9e+034 mil T=0.035 mm TanD=0.02 Rough=0 mil DielectricLossModel=1 FreqForEpsrTanD=1.0 GHz LowFreqForTanD=1.0 kHz HighFreqForTanD=1.0 THz RoughnessModel=2 
 C:C1  N__2 N__6 C=0.633 pF 
 end matckte
+define matdat ( N__1 ) 
+;parameters 
+#uselib "ckt" , "S1P"
+S1P:SNP1  N__1 0 File="H:\RF_Lab\RF-Labs\Lab4\Rogers_4_wrk\Rogers_4_lib\TOUCHSTONE96.S1P" Type="touchstone" InterpMode="linear" InterpDom="" ExtrapMode="constant" Temp=27.0 CheckPassivity=0 
+end matdat
 S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 \
 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output" 
 
@@ -45,3 +50,5 @@ matckta:I__3  N__4
 Port:Term1  N__4 0 Num=1 Z=50 Ohm Noise=yes 
 Port:Term2  N__1 0 Num=2 Z=50 Ohm Noise=yes 
 Port:Term3  N__2 0 Num=3 Z=50 Ohm Noise=yes 
+matdat:I__10  N__8 
+Port:Term4  N__8 0 Num=4 Z=50 Ohm Noise=yes 
