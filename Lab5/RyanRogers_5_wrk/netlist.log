@@ -1,0 +1,25 @@
+
+Options ResourceUsage=yes UseNutmegFormat=no EnableOptim=no TopDesignName="RyanRogers_5_lib:HarmonicTuningStub.dsn:schematic"
+Port:Term1  N__1 0 Num=1 Z=50 Ohm Noise=yes 
+MLIN2:TL1  N__1 N__2 Subst="MSub1" W=W50 mm L=10 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MTEE_ADS:Tee1  N__2 N__8 N__5 Subst="MSub1" W1=W50 mm W2=W50 mm W3=WStub mm 
+MLIN2:TL2  N__8 N__10 Subst="MSub1" W=W50 mm L=10 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+Port:Term2  N__10 0 Num=2 Z=50 Ohm Noise=yes 
+MRSTUB:Stub1  N__5 Subst="MSub1" Wi=WStub mm L=LStub mm Angle=70 
+
+W50=0.118938 tune{ 0.059469 to 0.178407 by 0.0118938 }
+WStub=0.118938 tune{ 0.059469 to 0.178407 by 0.0118938 }
+LStub=3.291013 tune{ 2.99183 to 8.97549 by 0.598366 }
+S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 \
+SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output" 
+
+SweepPlan: SP1_stim Start=0.5 GHz Stop=8 GHz Step=0.1 GHz 
+
+OutputPlan:SP1_Output \
+      Type="Output" \
+      UseEquationNestLevel=yes \
+      EquationNestLevel=2 \
+      UseSavedEquationNestLevel=yes \
+      SavedEquationNestLevel=2
+
+model MSub1 MSUB H=0.125 mm Er=9.6 Mur=1 Cond=1.0E+50 Hu=1.0e+033 mm T=0.005 mm TanD=0.0009 Rough=0 mm DielectricLossModel=1 FreqForEpsrTanD=1.0 GHz LowFreqForTanD=1.0 kHz HighFreqForTanD=1.0 THz RoughnessModel=2 

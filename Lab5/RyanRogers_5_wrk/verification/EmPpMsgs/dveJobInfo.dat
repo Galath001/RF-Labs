@@ -1,0 +1,5 @@
+jobName=EmPpMsgs
+jobType=emprep
+designName=RyanRogers_5_lib:HarmonicTuningStub.dsn:layout
+ruleFilePath=
+addInfo="EM preprocessor messages displayed as DRC errors"
