@@ -1,0 +1,41 @@
+
+hpeesofsim (*) 510.shp Jul 22 2019, MINT version 5
+    (64-bit windows built: Mon Jul 22, 2019 22:53:59 +0000)
+
+
+OPTIM Optim1[1] <RyanRogers_Lab6_lib:quad_main_1:schematic>  optIter=(0->25)
+
+SP Optim1[1].SP1[0] <RyanRogers_Lab6_lib:quad_main_1:schematic>  optIter=0  freq=(1 GHz->8 GHz)
+
+Iteration/Trial #0:
+  CurrentEF: 6.13834257166693
+  Optimization variables:
+    quad_real_1_4port.L_lr = 12.3348
+    quad_real_1_4port.L_tb = 11.7911
+    quad_real_1_4port.W_lr = 220.64e-03
+    quad_real_1_4port.W_tb = 444.575e-03
+
+SP Optim1[1].SP1[12] <RyanRogers_Lab6_lib:quad_main_1:schematic>  optIter=12  freq=(1 GHz->8 GHz)
+
+Iteration/Trial #12:
+  CurrentEF: 2.23016131916642
+  Optimization variables:
+    quad_real_1_4port.L_lr = 12.4367176438089
+    quad_real_1_4port.L_tb = 11.4463233483042
+    quad_real_1_4port.W_lr = 234.6826352061203e-03
+    quad_real_1_4port.W_tb = 452.7529049489973e-03
+
+SP Optim1[1].SP1[25] <RyanRogers_Lab6_lib:quad_main_1:schematic>  optIter=25  freq=(1 GHz->8 GHz)
+
+Iteration/Trial #25:
+  CurrentEF: 1.36406938038981
+  Optimization variables:
+    quad_real_1_4port.L_lr = 12.23321199835859
+    quad_real_1_4port.L_tb = 11.66404526024673
+    quad_real_1_4port.W_lr = 226.4370898002485e-03
+    quad_real_1_4port.W_tb = 449.6201835473463e-03
+Optim1[1] reached the iteration limit. 
+
+Resource usage:
+  Total stopwatch time     =    91.59 seconds.
+

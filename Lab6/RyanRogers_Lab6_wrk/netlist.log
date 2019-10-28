@@ -1,0 +1,82 @@
+; Top Design: "RyanRogers_Lab6_lib:quad_main_1:schematic"
+; Netlisted using Hierarchy Policy: "Standard"
+
+Options ResourceUsage=yes UseNutmegFormat=no EnableOptim=yes TopDesignName="RyanRogers_Lab6_lib:quad_main_1:schematic" DcopOutputNodeVoltages=yes DcopOutputPinCurrents=yes DcopOutputAllSweepPoints=no DcopOutputDcopType=0
+; Library Name: RyanRogers_Lab6_lib
+; Cell Name: quad_ideal_1_4port.dsn
+; View Name: schematic
+define "quad_ideal_1_4port\.dsn" ( P1  P2  P3  P4 ) 
+;parameters 
+TLIN:TL1  P4 P3 Z=Zo_tb Ohm E=theta_tb F=fc GHz 
+TLIN:TL2  P1 P2 Z=Zo_tb Ohm E=theta_tb F=fc GHz 
+TLIN:TL3  P2 P3 Z=Zo_lr Ohm E=theta_lr F=fc GHz 
+TLIN:TL4  P1 P4 Z=Zo_lr Ohm E=theta_lr F=fc GHz 
+
+fc=2.5
+Zo_tb=35.35
+Zo_lr=50
+theta_tb=90
+theta_lr=90
+end "quad_ideal_1_4port\.dsn"
+
+; Library Name: RyanRogers_Lab6_lib
+; Cell Name: quad_real_1_4port
+; View Name: schematic
+define quad_real_1_4port ( P1  P2  P3  P4 ) 
+;parameters 
+model MSub1 MSUB H=10 mil Er=9.6 Mur=1 Cond=1.0E+50 Hu=3.9e+034 mil T=1.7 mil TanD=0.005 Rough=0 mm DielectricLossModel=1 FreqForEpsrTanD=1.0 GHz LowFreqForTanD=1.0 kHz HighFreqForTanD=1.0 THz RoughnessModel=2 
+
+W_tb=0.444575 notune{ 0.222 to 0.667 by 0.0445 } opt{ 0.222 to 0.667 }
+W_50=0.220640 noopt{ 0.11 to 0.331 }
+W_lr=0.220640 notune{ 0.11 to 0.331 by 0.0221 } opt{ 0.11 to 0.331 }
+L_tb=11.7911 notune{ 5.9 to 17.7 by 1.18 } opt{ 5.9 to 17.7 }
+L_lr=12.3348 notune{ 6.17 to 18.5 by 1.23 } opt{ 6.17 to 18.5 }
+MLIN2:TL1  N__4 N__5 Subst="MSub1" W=W_tb mm L=L_tb mm Wall1=2.5e+28 mm Wall2=2.5e+28 mm Mod=1 
+MLIN2:TL2  N__6 N__7 Subst="MSub1" W=W_lr mm L=L_lr mm Wall1=2.5e+28 mm Wall2=2.5e+28 mm Mod=1 
+MLIN2:TL3  N__8 N__9 Subst="MSub1" W=W_lr mm L=L_lr mm Wall1=2.5e+28 mm Wall2=2.5e+28 mm Mod=1 
+MLIN2:TL4  N__10 N__11 Subst="MSub1" W=W_tb mm L=L_tb mm Wall1=2.5e+28 mm Wall2=2.5e+28 mm Mod=1 
+MTEE_ADS:Tee1  P1 N__4 N__6 Subst="MSub1" W1=W_50 mm W2=W_tb mm W3=W_lr mm 
+MTEE_ADS:Tee2  N__5 P2 N__8 Subst="MSub1" W1=W_tb mm W2=W_50 mm W3=W_lr mm 
+MTEE_ADS:Tee3  P3 N__11 N__9 Subst="MSub1" W1=W_50 mm W2=W_tb mm W3=W_lr mm 
+MTEE_ADS:Tee4  N__10 P4 N__7 Subst="MSub1" W1=W_tb mm W2=W_50 mm W3=W_lr mm 
+end quad_real_1_4port
+
+"quad_ideal_1_4port\.dsn":X1  N__2 N__0 N__7 N__5 
+Port:Term1  N__2 0 Num=1 Z=50 Ohm Noise=yes 
+Port:Term2  N__0 0 Num=2 Z=50 Ohm Noise=yes 
+Port:Term4  N__5 0 Num=4 Z=50 Ohm Noise=yes 
+S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 \
+SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output" 
+
+SweepPlan: SP1_stim Start=1.0 GHz Stop=8 GHz Step=0.05 GHz 
+
+OutputPlan:SP1_Output \
+      Type="Output" \
+      UseEquationNestLevel=yes \
+      EquationNestLevel=2 \
+      UseSavedEquationNestLevel=yes \
+      SavedEquationNestLevel=2
+
+#load "python","LinearCollapse"
+Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2
+Port:Term3  N__7 0 Num=3 Z=50 Ohm Noise=yes 
+quad_real_1_4port:X2  N__6 N__8 N__13 N__15 
+Port:Term5  N__6 0 Num=5 Z=50 Ohm Noise=yes 
+Port:Term6  N__8 0 Num=6 Z=50 Ohm Noise=yes 
+Port:Term7  N__13 0 Num=7 Z=50 Ohm Noise=yes 
+Port:Term8  N__15 0 Num=8 Z=50 Ohm Noise=yes 
+OptimGoal:OptimGoal1 Expr="mag(S(1,1) - S(5,5))" SimInstanceName="SP1" Weight=1.0 \
+SpecLimitLine[1]="OptimGoal1_limit1" 
+SpecLimitLine:"OptimGoal1_limit1" Type="EqualTo" Min=0.0 Max=0.0 Weight=1.0 
+OptimGoal:OptimGoal2 Expr="mag(S(2,1) - S(6,5))" SimInstanceName="SP1" Weight=1.0 \
+SpecLimitLine[1]="OptimGoal2_limit1" 
+SpecLimitLine:"OptimGoal2_limit1" Type="EqualTo" Min=0.0 Max=0.0 Weight=1.0 
+OptimGoal:OptimGoal3 Expr="mag(S(3,1) - S(7,5))" SimInstanceName="SP1" Weight=1.0 \
+SpecLimitLine[1]="OptimGoal3_limit1" 
+SpecLimitLine:"OptimGoal3_limit1" Type="EqualTo" Min=0.0 Max=0.0 Weight=1.0 
+OptimGoal:OptimGoal4 Expr="mag(S(4,1) - S(8,5))" SimInstanceName="SP1" Weight=1.0 \
+SpecLimitLine[1]="OptimGoal4_limit1" 
+SpecLimitLine:"OptimGoal4_limit1" Type="EqualTo" Min=0.0 Max=0.0 Weight=1.0 
+
+Optim:"Optim1" OptimType="random" ErrorForm="L2" MaxIters=25 P=2 DesiredError=0.0 StatusLevel=4 FinalAnalysis="None" NormalizeGoals=yes SetBestValues=yes SaveSolns=yes SaveGoals=yes SaveOptimVars=no UpdateDataset=yes SaveNominal=no SaveAllIterations=no UseAllOptVars=yes UseAllGoals=yes SaveCurrentEF=no InitialTempControlMode=0 NumShootsPerIter=20 EnableCockpit=yes NormalizeError=yes SaveAllTrials=no UseAdvTermCriteria=no CostRelativeTol=1.0e-8 LimitOfContSmallImprovement=5 
+
