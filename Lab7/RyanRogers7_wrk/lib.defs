@@ -1,0 +1,4 @@
+INCLUDE $HPEESOF_DIR/oalibs/analog_rf.defs
+INCLUDE $HPEESOF_DIR/oalibs/dsp.defs
+DEFINE RyanRogers7_lib RyanRogers7_lib
+ASSIGN RyanRogers7_lib libMode shared

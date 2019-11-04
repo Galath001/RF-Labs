@@ -1,0 +1,87 @@
+
+Options ResourceUsage=yes UseNutmegFormat=no EnableOptim=no TopDesignName="RyanRogers7_lib:lab7_lab:schematic"
+define lab7_10db ( N__0  N__2  N__1  N__3 ) 
+;parameters 
+model MSub1 MSUB H=1.58 mm Er=4.3 Mur=1 Cond=1.0E+50 Hu=1.0e+033 mm T=0.035 mm TanD=0.02 Rough=0 mm DielectricLossModel=1 FreqForEpsrTanD=1.0 GHz LowFreqForTanD=1.0 kHz HighFreqForTanD=1.0 THz RoughnessModel=2 
+MCLIN:CLin1  N__0 N__1 N__3 N__2 Subst="MSub1" W=2.521930 mm S=0.338296 mm L=21.413400 mm 
+end lab7_10db
+define lab7_20db ( N__4  N__5  N__6  N__7 ) 
+;parameters 
+model MSub1 MSUB H=1.58 mm Er=4.3 Mur=1 Cond=1.0E+50 Hu=1.0e+033 mm T=0.035 mm TanD=0.02 Rough=0 mm DielectricLossModel=1 FreqForEpsrTanD=1.0 GHz LowFreqForTanD=1.0 kHz HighFreqForTanD=1.0 THz RoughnessModel=2 
+MCLIN:CLin1  N__4 N__6 N__7 N__5 Subst="MSub1" W=2.986150 mm S=2.074310 mm L=20.867800 mm 
+end lab7_20db
+define lab7_20db2 ( N__29  N__34  N__30  N__33 ) 
+;parameters 
+model MSub1 MSUB H=1.58 mm Er=4.3 Mur=1 Cond=1.0E+50 Hu=1.0e+033 mm T=0.035 mm TanD=0.02 Rough=0 mm DielectricLossModel=1 FreqForEpsrTanD=1.0 GHz LowFreqForTanD=1.0 kHz HighFreqForTanD=1.0 THz RoughnessModel=2 
+MCLIN:CLin1  N__4 N__6 N__2 N__3 Subst="MSub1" W=2.986150 mm S=2.074310 mm L=20.867800 mm 
+MCORN:Corn1  N__3 N__5 Subst="MSub1" W=W mm 
+
+W=3.050510
+L=20.775700
+MLIN2:TL1  N__14 N__1 Subst="MSub1" W=W mm L=5 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MCORN:Corn2  N__8 N__2 Subst="MSub1" W=W mm 
+MCORN:Corn3  N__6 N__11 Subst="MSub1" W=W mm 
+MCORN:Corn4  N__1 N__4 Subst="MSub1" W=W mm 
+MCORN:Corn5  N__14 N__15 Subst="MSub1" W=W mm 
+MCORN:Corn6  N__16 N__17 Subst="MSub1" W=W mm 
+MCORN:Corn7  N__18 N__19 Subst="MSub1" W=W mm 
+MCORN:Corn8  N__20 N__21 Subst="MSub1" W=W mm 
+MLIN2:TL2  N__11 N__17 Subst="MSub1" W=W mm L=5 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MLIN2:TL3  N__21 N__5 Subst="MSub1" W=W mm L=5 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MLIN2:TL4  N__8 N__18 Subst="MSub1" W=W mm L=5 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MLIN2:TL5  N__29 N__15 Subst="MSub1" W=W mm L=5 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MLIN2:TL6  N__19 N__30 Subst="MSub1" W=W mm L=5 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MLIN2:TL7  N__33 N__16 Subst="MSub1" W=W mm L=5 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MLIN2:TL8  N__20 N__34 Subst="MSub1" W=W mm L=5 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+end lab7_20db2
+define lab7_23Meas ( N__2  N__1 ) 
+;parameters 
+#uselib "ckt" , "S2P"
+S2P:SNP1  N__2 N__1 0 File="H:\RF_Lab\RF-Labs\Lab7\RyanRogers7_wrk\23MATCHED.S2P" Type="touchstone" InterpMode="linear" InterpDom="" ExtrapMode="constant" Temp=27.0 CheckPassivity=0 
+end lab7_23Meas
+define lab7_24Meas ( N__2  N__1 ) 
+;parameters 
+#uselib "ckt" , "S2P"
+S2P:SNP1  N__2 N__1 0 File="H:\RF_Lab\RF-Labs\Lab7\RyanRogers7_wrk\24MATCHED.S2P" Type="touchstone" InterpMode="linear" InterpDom="" ExtrapMode="constant" Temp=27.0 CheckPassivity=0 
+end lab7_24Meas
+define lab7_34Meas ( N__2  N__1 ) 
+;parameters 
+#uselib "ckt" , "S2P"
+S2P:SNP1  N__2 N__1 0 File="H:\RF_Lab\RF-Labs\Lab7\RyanRogers7_wrk\34MATCHED.S2P" Type="touchstone" InterpMode="linear" InterpDom="" ExtrapMode="constant" Temp=27.0 CheckPassivity=0 
+end lab7_34Meas
+lab7_10db:I__0  N__9 N__10 N__13 N__15 
+lab7_20db:I__1  N__17 N__19 N__7 N__23 
+Port:Term1  N__9 0 Num=1 Z=50 Ohm Noise=yes 
+Port:Term2  N__10 0 Num=2 Z=50 Ohm Noise=yes 
+Port:Term3  N__13 0 Num=3 Z=50 Ohm Noise=yes 
+Port:Term4  N__15 0 Num=4 Z=50 Ohm Noise=yes 
+Port:Term5  N__17 0 Num=5 Z=50 Ohm Noise=yes 
+Port:Term6  N__19 0 Num=6 Z=50 Ohm Noise=yes 
+Port:Term7  N__7 0 Num=7 Z=50 Ohm Noise=yes 
+Port:Term8  N__23 0 Num=8 Z=50 Ohm Noise=yes 
+S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 \
+SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output" 
+
+SweepPlan: SP1_stim Start=0 GHz Stop=6 GHz Lin=401 
+
+OutputPlan:SP1_Output \
+      Type="Output" \
+      UseEquationNestLevel=yes \
+      EquationNestLevel=2 \
+      UseSavedEquationNestLevel=yes \
+      SavedEquationNestLevel=2
+
+lab7_20db2:I__19  N__18 N__8 N__12 N__22 
+Port:Term9  N__18 0 Num=9 Z=50 Ohm Noise=yes 
+Port:Term10  N__22 0 Num=10 Z=50 Ohm Noise=yes 
+Port:Term11  N__12 0 Num=11 Z=50 Ohm Noise=yes 
+Port:Term12  N__8 0 Num=12 Z=50 Ohm Noise=yes 
+lab7_23Meas:I__28  N__27 N__29 
+Port:Term13  N__27 0 Num=13 Z=50 Ohm Noise=yes 
+Port:Term14  N__29 0 Num=14 Z=50 Ohm Noise=yes 
+lab7_24Meas:I__33  N__30 N__33 
+Port:Term15  N__30 0 Num=15 Z=50 Ohm Noise=yes 
+Port:Term16  N__33 0 Num=16 Z=50 Ohm Noise=yes 
+lab7_34Meas:I__38  N__34 N__37 
+Port:Term17  N__34 0 Num=17 Z=50 Ohm Noise=yes 
+Port:Term18  N__37 0 Num=18 Z=50 Ohm Noise=yes 
