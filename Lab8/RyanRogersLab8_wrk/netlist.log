@@ -1,0 +1,18 @@
+
+Options ResourceUsage=yes UseNutmegFormat=no EnableOptim=no TopDesignName="RyanRogersLab8_lib:lpsim:schematic"
+#uselib "ckt" , "S2P"
+S2P:SNP1  N__5 N__3 0 File="H:\RF_Lab\RF-Labs\Lab8\RyanRogersLab8_wrk\TOUCHSTONE2.S2P" Type="touchstone" InterpMode="linear" InterpDom="" ExtrapMode="constant" Temp=27.0 CheckPassivity=0 
+Port:Term1  N__3 0 Num=1 Z=50 Ohm Noise=yes 
+Port:Term2  N__5 0 Num=2 Z=50 Ohm Noise=yes 
+S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 \
+SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output" 
+
+SweepPlan: SP1_stim Start=300 kHz Stop=3 GHz Lin=401 
+
+OutputPlan:SP1_Output \
+      Type="Output" \
+      UseEquationNestLevel=yes \
+      EquationNestLevel=2 \
+      UseSavedEquationNestLevel=yes \
+      SavedEquationNestLevel=2
+
