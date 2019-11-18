@@ -1,0 +1,46 @@
+
+Options ResourceUsage=yes UseNutmegFormat=no EnableOptim=no TopDesignName="RyanRogers9_lib:lpfd_lab:schematic"
+define lpfd1 ( N__2  N__9 ) 
+;parameters 
+MLIN2:TL1  N__2 N__4 Subst="MSub1" W=3.042610 mm L=5mm mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MLIN2:TL2  N__4 N__6 Subst="MSub1" W=0.503687 mm L=12.774300 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MLIN2:TL3  N__6 N__8 Subst="MSub1" W=11.125200 mm L=6.809070 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MLIN2:TL4  N__8 N__10 Subst="MSub1" W=0.503687 mm L=12.774300 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MLIN2:TL5  N__10 N__9 Subst="MSub1" W=3.042610 mm L=5mm mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+model MSub1 MSUB H=1.58 mm Er=4.3 Mur=1 Cond=1.0E+50 Hu=1.0e+033 mm T=0.035 mm TanD=0.02 Rough=0 mm DielectricLossModel=1 FreqForEpsrTanD=1.0 GHz LowFreqForTanD=1.0 kHz HighFreqForTanD=1.0 THz RoughnessModel=2 
+end lpfd1
+define lpfd2 ( N__7  N__2 ) 
+;parameters 
+MLIN2:TL5  N__9 N__2 Subst="MSub1" W=3.042610 mm L=5mm mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MLIN2:TL4  N__8 N__3 Subst="MSub1" W=0.503687 mm L=12.774300 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MLIN2:TL3  N__0 N__16 Subst="MSub1" W=11.125200 mm L=6.809070 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MLIN2:TL2  N__1 N__5 Subst="MSub1" W=0.503687 mm L=12.774300 mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+MLIN2:TL1  N__7 N__6 Subst="MSub1" W=3.042610 mm L=5mm mm Wall1=2.5e+028 mm Wall2=2.5e+028 mm Mod=1 
+model MSub1 MSUB H=1.58 mm Er=4.3 Mur=1 Cond=1.0E+50 Hu=1.0e+033 mm T=0.035 mm TanD=0.02 Rough=0 mm DielectricLossModel=1 FreqForEpsrTanD=1.0 GHz LowFreqForTanD=1.0 kHz HighFreqForTanD=1.0 THz RoughnessModel=2 
+MSTEP:Step1  N__6 N__1 Subst="MSub1" W1=3.042610 mm W2=0.503687 mm 
+MSTEP:Step2  N__5 N__0 Subst="MSub1" W1=0.503687 mm W2=11.125200 mm 
+MSTEP:Step3  N__16 N__8 Subst="MSub1" W1=11.125200 mm W2=0.503687 mm 
+MSTEP:Step4  N__3 N__9 Subst="MSub1" W1=0.503687 mm W2=3.042610 mm 
+end lpfd2
+lpfd1:I__0  N__1 N__5 
+Port:Term1  N__1 0 Num=1 Z=50 Ohm Noise=yes 
+Port:Term2  N__5 0 Num=2 Z=50 Ohm Noise=yes 
+lpfd2:I__5  N__0 N__9 
+Port:Term3  N__0 0 Num=3 Z=50 Ohm Noise=yes 
+Port:Term4  N__9 0 Num=4 Z=50 Ohm Noise=yes 
+S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 \
+SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output" 
+
+SweepPlan: SP1_stim Start=300 kHz Stop=6 GHz Lin=401 
+
+OutputPlan:SP1_Output \
+      Type="Output" \
+      UseEquationNestLevel=yes \
+      EquationNestLevel=2 \
+      UseSavedEquationNestLevel=yes \
+      SavedEquationNestLevel=2
+
+#uselib "ckt" , "S2P"
+S2P:SNP1  N__6 N__14 0 File="H:\RF_Lab\RF-Labs\Lab9\RyanRogers9_wrk\129.S2P" Type="touchstone" InterpMode="linear" InterpDom="" ExtrapMode="constant" Temp=27.0 CheckPassivity=0 
+Port:Term5  N__6 0 Num=5 Z=50 Ohm Noise=yes 
+Port:Term6  N__14 0 Num=6 Z=50 Ohm Noise=yes 
